@@ -1,0 +1,5 @@
+interface:
+  display_name: "ArXiv 人体中心视觉周报"
+  short_description: "检索、翻译并整理每周人体中心视觉 arXiv 论文"
+  default_prompt: "Use $arxiv-human-centric-weekly to generate last week's Chinese human-centric computer vision arXiv digest, verify open-source stars, and commit it locally without pushing."
+
