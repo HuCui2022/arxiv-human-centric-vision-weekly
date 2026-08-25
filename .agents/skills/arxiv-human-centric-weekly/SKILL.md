@@ -63,7 +63,7 @@ After writing and verifying the digest:
 - Check the working tree and preserve unrelated user changes.
 - Add only the new or intentionally updated digest and directly related project documentation or skill files.
 - Create a local commit with a concise message such as `Add human-centric CV arXiv digest for YYYY-MM-DD to YYYY-MM-DD` when the user asks for the standard weekly workflow.
-- Never run `git push`, force-push, create a remote repository, or change remotes. The user performs the push.
+- Run a normal `git push` only when the current user request or the active automation explicitly requires it. Never force-push, create a remote repository, change remotes, or rewrite history to bypass a failed push; otherwise leave pushing to the user.
 - If local Git ownership protection triggers, use the narrowest per-command `safe.directory` handling possible; do not change global Git configuration unless the user explicitly asks.
 
 ## Invocation examples
