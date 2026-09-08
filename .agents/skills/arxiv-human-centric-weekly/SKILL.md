@@ -1,6 +1,6 @@
 ---
 name: arxiv-human-centric-weekly
-description: Generate the recurring Chinese weekly digest of newly submitted arXiv cs.CV papers about human-centric vision and lighting, then optionally commit it locally without pushing. Use for this project's weekly Tuesday paper collection or equivalent requests to update the human-centric arXiv digest.
+description: Generate the recurring Chinese weekly digest of newly submitted arXiv cs.CV papers about human-centric vision and lighting, with verified code-release markers and optional Git commit or authorized push. Use for this project's weekly Tuesday paper collection or equivalent requests to update the human-centric arXiv digest.
 ---
 
 # ArXiv Human-Centric Vision Weekly
@@ -31,7 +31,11 @@ Exclude incidental keyword matches, including camera/object pose estimation, gen
 - Prefer the official arXiv API and `https://arxiv.org/list/cs.CV/recent`; paginate until the full date window is covered.
 - Search titles and abstracts broadly, then read each candidate's complete metadata before deciding relevance.
 - Do not rely on search-engine snippets when official arXiv metadata is available.
-- For open-source status, mark `★` only when the arXiv page, abstract, comments, or linked project explicitly provides a currently public source-code repository. A project page, demo, dataset-only release, or promise to release later is insufficient.
+- For open-source status, use two distinct markers:
+  - Mark `★` only when the arXiv page, abstract, comments, or linked project provides a currently public source-code repository containing actual implementation code.
+  - Mark `☆` when the paper explicitly claims that code will be or has been released, or links a project page or public placeholder repository, but no current repository with actual implementation code can be verified. Examples include "code coming soon," an inaccessible code link, and a repository containing only a README, images, citation, or release promise.
+  - Use no marker when the paper makes no code-release claim. A demo, dataset-only release, or unrelated project-page source repository does not qualify for either marker.
+- When a claimed repository is reachable, inspect enough of its contents to distinguish actual implementation code from a placeholder. Do not infer `★` from the mere existence of a GitHub URL.
 - Do not ask the user to approve ordinary arXiv reads. If the execution environment itself requires a network permission dialog, request only the minimum required permission and continue after approval.
 
 ## Output
@@ -43,8 +47,8 @@ Write one Markdown file in the project root named:
 Use this structure:
 
 1. Title containing the inclusive date range.
-2. Source, date interpretation, selection scope, and `★` legend.
-3. Overview table with submission date, topic, Chinese title, arXiv abstract-page link, and `★` where applicable.
+2. Source, date interpretation, selection scope, and legends for `★` (verified public implementation) and `☆` (announced or linked, but implementation not yet verifiable).
+3. Overview table with submission date, topic, Chinese title, arXiv abstract-page link, and `★` or `☆` where applicable.
 4. Numbered paper details containing:
    - Chinese translated title;
    - original English title;
@@ -54,7 +58,7 @@ Use this structure:
    - faithful, fluent Chinese translation of the complete abstract.
 5. Selection notes, including whether no direct illumination-estimation paper was found and which nearby lighting work was included.
 
-Preserve technical names, dataset names, model names, metrics, and numerical results. Translate meaning rather than adding unsupported interpretation. Perform a final check for date leakage, duplicate papers, malformed links, mistranslations, and inconsistent stars.
+Preserve technical names, dataset names, model names, metrics, and numerical results. Translate meaning rather than adding unsupported interpretation. Perform a final check for date leakage, duplicate papers, malformed links, mistranslations, and marker consistency. In the selection notes, list the evidence behind every `★` and `☆`; never assign both markers to one paper.
 
 ## Git boundary
 
